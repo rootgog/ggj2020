@@ -1,6 +1,7 @@
 import {
     canvas,
-    ctx
+    ctx,
+    view
 } from "../app.js";
 
 export default class Map {
@@ -17,12 +18,19 @@ export default class Map {
         this.setSizeParameters();
     }
 
-    collisions(node) {
-        if (node.pos.x < this.padding.x ||
-            node.pos.x + node.width > (this.padding.x + (this.unit * this.width)) ||
-            node.pos.y < this.padding.y ||
-            node.pos.y + node.width > (this.padding.y + (this.unit * this.height))) {
-            return "out of bounds";
+    getUnitSize() {
+        return this.unit;
+    }
+
+    isInBounds(node) {
+        let unit = view.getMap().getUnitSize();
+        if (node.pos.x * unit < this.padding.x ||
+            (node.pos.x + node.width) * unit > (this.padding.x + (this.unit * this.width)) ||
+            node.pos.y * unit < this.padding.y ||
+            (node.pos.y + node.width) * unit > (this.padding.y + (this.unit * this.height))) {
+            return false;
+        } else {
+            return true;
         }
     }
 

@@ -1,4 +1,6 @@
-import Game from "./views/game.js";
+import {
+    Game
+} from "./views/game.js";
 
 let canvas = document.getElementById("game");
 let ctx = canvas.getContext("2d");

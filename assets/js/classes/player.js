@@ -4,27 +4,30 @@ import {
     view
 } from "../app.js";
 
-export default class Player {
+class Player {
     constructor() {
         window.addEventListener("keydown", this.keyDown.bind(this));
         window.addEventListener("keyup", this.keyUp.bind(this));
         this.pos = {
-            x: 200,
-            y: 200
+            x: 1,
+            y: 1
         }
         this.up = 0;
         this.right = 0;
-        this.speed = 100;
-        this.width = 35;
-        this.height = 35;
+        this.speed = 3;
+        this.width = 0.2;
+        this.height = 0.2;
         this.dir = 0;
     }
 
     draw() {
         this.updatePosition();
+
+        let unit = view.getMap().getUnitSize();
+
         ctx.beginPath();
         ctx.fillStyle = 'red';
-        ctx.rect(this.pos.x, this.pos.y, this.width, this.height);
+        ctx.rect(this.pos.x * unit, this.pos.y * unit, this.width * unit, this.height * unit);
         ctx.fill();
     }
 
@@ -70,9 +73,26 @@ export default class Player {
     }
     updatePosition() {
 
-        view.getMap().collisions(this);
+        let newpos = {
+            pos: {
+                x: this.pos.x + this.right * deltaTime,
+                y: this.pos.y + this.up * deltaTime
+            },
+            width: this.width,
+            height: this.height
+        }
 
-        this.pos.x += this.right * deltaTime;
-        this.pos.y += this.up * deltaTime;
+        if (view.getMap().isInBounds(newpos)) {
+            this.pos.x = newpos.pos.x;
+            this.pos.y = newpos.pos.y;
+        } else {
+            //console.log("out of bounds");
+        }
+
+
     }
 }
+
+let player = new Player();
+
+export default player;

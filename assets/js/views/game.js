@@ -1,23 +1,20 @@
 import {
     View
 } from "../classes/view.js";
-import {
-    deltaTime
-} from "../app.js";
-import Player from "../classes/player.js";
 import level1 from "../maps/level1.js";
 import Map from "./../classes/map.js";
 
-export default class Game extends View {
+class Game extends View {
 
     constructor() {
         super();
-        this.player = new Player();
         this.map;
-        this.levels = [level1.map];
+        this.levels = [level1];
         this.level = 0;
 
-        this.setMap(new Map(this.levels[this.level]));
+        this.entities = this.levels[this.level].entities;
+
+        this.setMap(new Map(this.levels[this.level].map));
     }
 
     getMap() {
@@ -32,7 +29,12 @@ export default class Game extends View {
         super.draw();
         //draw elements
         this.map.draw();
-
-        this.player.draw();
+        this.entities.forEach(entity => {
+            entity.draw();
+        });
     }
+}
+
+export {
+    Game
 }
