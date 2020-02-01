@@ -132,7 +132,6 @@ class Game extends View {
 
                 nextLevel.init();
 
-
             }
         }
     }

@@ -1,7 +1,7 @@
 import {
     Game
 } from "./views/game.js";
-import player from "./classes/player.js";
+import MainMenu from "./views/mainmenu.js";
 
 let canvas = document.getElementById("game");
 let ctx = canvas.getContext("2d");
@@ -20,8 +20,11 @@ let setCanvasFullScreen = () => {
 setCanvasFullScreen();
 
 
-let view = new Game();
+var view = new MainMenu();
 
+let setView = (newView) => {
+    view = newView;
+}
 
 let deltaTime;
 let lastFrame = Date.now();
@@ -32,11 +35,14 @@ let renderFrame = () => {
     deltaTime = (Date.now() - lastFrame) / 1000;
     lastFrame = Date.now();
 
-    view.draw();
+    if (view != null) {
+        view.draw();
 
-    if (view.active) {
-        requestAnimationFrame(renderFrame);
+        if (view.active) {
+            requestAnimationFrame(renderFrame);
+        }
     }
+
 }
 
 gameLoop = requestAnimationFrame(renderFrame);
@@ -46,5 +52,7 @@ export {
     ctx,
     canvas,
     gameLoop,
-    view
+    view,
+    renderFrame,
+    setView
 }
