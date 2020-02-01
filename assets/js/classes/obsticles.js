@@ -1,5 +1,6 @@
 import {
-    pointFromPoint
+    pointFromPoint,
+    unitToCanvasConversionArc
 } from "./functions.js";
 import {
     view,
@@ -68,12 +69,11 @@ class Ball {
 
     draw() {
 
-        let unit = view.getMap().getUnitSize();
-        let padding = view.getMap().getPadding();
+        let coords = unitToCanvasConversionArc(this.pos.x, this.pos.y, this.r);
 
         ctx.beginPath();
         ctx.fillStyle = 'red';
-        ctx.arc((this.pos.x * unit) + padding.x, (this.pos.y * unit) + padding.y, this.r * unit, 0, 2 * Math.PI);
+        ctx.arc(coords.x, coords.y, coords.r, 0, 2 * Math.PI);
         ctx.fill();
     }
 }

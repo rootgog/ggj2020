@@ -17,6 +17,10 @@ import {
 import {
     gameLoop
 } from "../app.js";
+import {
+    Bridge,
+    BridgePiece
+} from "../classes/bridge.js";
 
 class Game extends View {
 
@@ -52,6 +56,25 @@ class Game extends View {
 
                         //give item to player
                         player.inventory.push(entity);
+                    }
+
+                    if (entity instanceof Bridge) {
+
+                        let bridgepieces = player.inventory.filter((item) => item instanceof BridgePiece);
+
+                        //consume item
+                        for (let p = 0; p < bridgepieces.length; p++) {
+                            const piece = bridgepieces[p];
+
+
+                            player.inventory.splice(p, 1);
+
+                            console.log(piece + "added to bridge");
+
+
+                        }
+
+                        //console.log("on bridge");
                     }
                 }
                 if (entity instanceof SpinningBallBar) {

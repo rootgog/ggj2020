@@ -1,10 +1,11 @@
 import player from "../classes/player.js";
 import {
-    Pickupable
-} from "../classes/pickupables.js";
-import {
     SpinningBallBar
 } from "../classes/obsticles.js";
+import {
+    Bridge,
+    BridgePiece
+} from "../classes/bridge.js";
 
 export default {
     map: [
@@ -17,9 +18,10 @@ export default {
         ["grey", "lightgrey", "grey", "lightgrey", "grey", "lightgrey", "grey", "lightgrey", "grey", "lightgrey", "grey"],
         ["lightgrey", "grey", "lightgrey", "grey", "lightgrey", "grey", "lightgrey", "grey", "lightgrey", "grey", "lightgrey"]
     ],
-    entities: [ //ARRAY OF NODES
-        player,
-        new Pickupable(),
-        new SpinningBallBar()
+    entities: [
+        new BridgePiece(),
+        new Bridge(),
+        new SpinningBallBar(),
+        player
     ]
 }

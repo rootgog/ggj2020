@@ -3,6 +3,9 @@ import {
     deltaTime,
     view
 } from "../app.js";
+import {
+    unitToCanvasConversionRect
+} from "./functions.js";
 
 class Player {
     constructor() {
@@ -24,12 +27,11 @@ class Player {
     draw() {
         this.updatePosition();
 
-        let unit = view.getMap().getUnitSize();
-        let padding = view.getMap().getPadding();
+        let coords = unitToCanvasConversionRect(this.pos.x, this.pos.y, this.width, this.height);
 
         ctx.beginPath();
         ctx.fillStyle = 'red';
-        ctx.rect((this.pos.x * unit) + padding.x, (this.pos.y * unit) + padding.y, this.width * unit, this.height * unit);
+        ctx.rect(coords.x, coords.y, coords.w, coords.h);
         ctx.fill();
     }
 

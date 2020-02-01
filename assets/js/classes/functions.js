@@ -1,3 +1,7 @@
+import {
+    view
+} from "../app.js";
+
 let rectCollision = (rect1, rect2) => {
 
     if (rect1.pos.x < rect2.pos.x + rect2.width &&
@@ -40,8 +44,31 @@ let pointFromPoint = (pointx, pointy, distance, angle) => {
     }
 }
 
+let unitToCanvasConversionRect = (x, y, w, h) => {
+    let unit = view.getMap().getUnitSize();
+    let padding = view.getMap().getPadding();
+    return {
+        x: (x * unit) + padding.x,
+        y: (y * unit) + padding.y,
+        w: (w * unit),
+        h: (h * unit)
+    }
+}
+
+let unitToCanvasConversionArc = (x, y, r) => {
+    let unit = view.getMap().getUnitSize();
+    let padding = view.getMap().getPadding();
+    return {
+        x: (x * unit) + padding.x,
+        y: (y * unit) + padding.y,
+        r: (r * unit)
+    }
+}
+
 export {
     rectCollision,
     rectCircleColliding,
-    pointFromPoint
+    pointFromPoint,
+    unitToCanvasConversionRect,
+    unitToCanvasConversionArc
 }

@@ -1,37 +1,41 @@
 import {
-    ctx
-} from "./../app.js";
-import {
     unitToCanvasConversionRect
 } from "./functions.js";
+import {
+    ctx
+} from "../app.js";
+import {
+    Pickupable
+} from "./pickupables.js";
 
-class Pickupable {
+class Bridge {
     constructor({
-        img = null,
-        width = 0.2,
-        height = 0.2,
-        x = 1.5,
-        y = 1.5
+        x = 5,
+        y = 2,
+        w = 2,
+        h = 3
     } = {}) {
-        this.img = img;
         this.pos = {
             x: x,
             y: y
         }
-        this.width = width;
-        this.height = height;
+        this.width = w;
+        this.height = h;
     }
     draw() {
-
         let coords = unitToCanvasConversionRect(this.pos.x, this.pos.y, this.width, this.height);
-
         ctx.beginPath();
-        ctx.fillStyle = 'darkgreen';
+        ctx.fillStyle = 'saddlebrown';
         ctx.rect(coords.x, coords.y, coords.w, coords.h);
         ctx.fill();
     }
 }
 
+class BridgePiece extends Pickupable {
+
+}
+
 export {
-    Pickupable
+    Bridge,
+    BridgePiece
 }
