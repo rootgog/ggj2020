@@ -1,4 +1,10 @@
 import player from "../classes/player.js";
+import {
+    Pickupable
+} from "../classes/pickupables.js";
+import {
+    SpinningBallBar
+} from "../classes/obsticles.js";
 
 export default {
     map: [
@@ -7,6 +13,8 @@ export default {
         ["white", "green", "orange"],
     ],
     entities: [ //ARRAY OF NODES
-        player
+        player,
+        new Pickupable(),
+        new SpinningBallBar()
     ]
 }

@@ -22,6 +22,10 @@ export default class Map {
         return this.unit;
     }
 
+    getPadding() {
+        return this.padding;
+    }
+
     isInBounds(node) {
         let unit = view.getMap().getUnitSize();
         if (node.pos.x * unit < this.padding.x ||

@@ -18,16 +18,18 @@ class Player {
         this.width = 0.2;
         this.height = 0.2;
         this.dir = 0;
+        this.inventory = [];
     }
 
     draw() {
         this.updatePosition();
 
         let unit = view.getMap().getUnitSize();
+        let padding = view.getMap().getPadding();
 
         ctx.beginPath();
         ctx.fillStyle = 'red';
-        ctx.rect(this.pos.x * unit, this.pos.y * unit, this.width * unit, this.height * unit);
+        ctx.rect((this.pos.x * unit) + padding.x, (this.pos.y * unit) + padding.y, this.width * unit, this.height * unit);
         ctx.fill();
     }
 
