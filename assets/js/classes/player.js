@@ -4,8 +4,12 @@ import {
     view
 } from "../app.js";
 import {
-    unitToCanvasConversionRect
+    unitToCanvasConversionRect,
+    rectCollision
 } from "./functions.js";
+import {
+    Bridge
+} from "./bridge.js";
 
 class Player {
     constructor() {
@@ -87,11 +91,32 @@ class Player {
         }
 
         if (view.getMap().isInBounds(newpos)) {
-            this.pos.x = newpos.pos.x;
-            this.pos.y = newpos.pos.y;
+
+            let moveLegal = true;
+
+            view.entities.forEach(entity => {
+                if (entity != player) {
+                    if (entity instanceof Bridge) {
+                        if (!entity.completed) {
+                            if (rectCollision(entity, newpos)) {
+                                moveLegal = false;
+                            }
+                        }
+                    }
+                }
+            });
+
+            if (moveLegal) {
+                this.pos.x = newpos.pos.x;
+                this.pos.y = newpos.pos.y;
+            }
+
+
         } else {
             //console.log("out of bounds");
         }
+
+
 
 
     }

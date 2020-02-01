@@ -13,7 +13,8 @@ class Bridge {
         x = 5,
         y = 2,
         w = 2,
-        h = 3
+        h = 3,
+        piecesRequired = 3
     } = {}) {
         this.pos = {
             x: x,
@@ -21,6 +22,9 @@ class Bridge {
         }
         this.width = w;
         this.height = h;
+        this.piecesRequired = piecesRequired;
+        this.piecesAquired = 0;
+        this.completed = false;
     }
     draw() {
         let coords = unitToCanvasConversionRect(this.pos.x, this.pos.y, this.width, this.height);
@@ -28,6 +32,12 @@ class Bridge {
         ctx.fillStyle = 'saddlebrown';
         ctx.rect(coords.x, coords.y, coords.w, coords.h);
         ctx.fill();
+    }
+    addPiece() {
+        this.piecesAquired++;
+        if (this.piecesAquired == this.piecesRequired) {
+            this.completed = true;
+        }
     }
 }
 

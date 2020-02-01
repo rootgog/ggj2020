@@ -19,7 +19,18 @@ export default {
         ["lightgrey", "grey", "lightgrey", "grey", "lightgrey", "grey", "lightgrey", "grey", "lightgrey", "grey", "lightgrey"]
     ],
     entities: [
-        new BridgePiece(),
+        new BridgePiece({
+            x: 2,
+            y: 2
+        }),
+        new BridgePiece({
+            x: 2,
+            y: 5
+        }),
+        new BridgePiece({
+            x: 7,
+            y: 2
+        }),
         new Bridge(),
         new SpinningBallBar(),
         player

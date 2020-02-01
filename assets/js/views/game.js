@@ -6,7 +6,8 @@ import Map from "./../classes/map.js";
 import player from "../classes/player.js";
 import {
     rectCollision,
-    rectCircleColliding
+    rectCircleColliding,
+    withinBorderRectRect
 } from "../classes/functions.js";
 import {
     Pickupable
@@ -14,9 +15,6 @@ import {
 import {
     SpinningBallBar
 } from "../classes/obsticles.js";
-import {
-    gameLoop
-} from "../app.js";
 import {
     Bridge,
     BridgePiece
@@ -47,18 +45,8 @@ class Game extends View {
         for (let i = 0; i < this.entities.length; i++) {
             const entity = this.entities[i];
             if (entity != player) {
-                if (rectCollision(player, entity)) {
-
-                    //pop off entity from entities array
-                    if (entity instanceof Pickupable) {
-                        this.entities.splice(i, 1);
-
-
-                        //give item to player
-                        player.inventory.push(entity);
-                    }
-
-                    if (entity instanceof Bridge) {
+                if (entity instanceof Bridge) {
+                    if (withinBorderRectRect(player, entity, 0.1)) {
 
                         let bridgepieces = player.inventory.filter((item) => item instanceof BridgePiece);
 
@@ -67,25 +55,45 @@ class Game extends View {
                             const piece = bridgepieces[p];
 
 
-                            player.inventory.splice(p, 1);
+                            player.inventory.splice(player.inventory.indexOf(piece), 1);
+
+                            entity.addPiece();
 
                             console.log(piece + "added to bridge");
 
+                            console.log(entity.completed);
+
 
                         }
 
-                        //console.log("on bridge");
+                        if (player.pos.x > entity.pos.x && player.pos.x + player.width < entity.pos.x + entity.width) {
+                            //console.log("can walk");
+                        }
+
+
                     }
-                }
-                if (entity instanceof SpinningBallBar) {
-                    for (let i = 0; i < entity.balls.length; i++) {
-                        const ball = entity.balls[i];
-                        if (rectCircleColliding(ball, player)) {
-                            //player dead
-                            console.log(i);
-                            this.active = false;
+                } else {
+                    if (rectCollision(player, entity)) {
+
+                        //pop off entity from entities array
+                        if (entity instanceof Pickupable) {
+                            this.entities.splice(i, 1);
+
+
+                            //give item to player
+                            player.inventory.push(entity);
                         }
-                    };
+                    }
+                    if (entity instanceof SpinningBallBar) {
+                        for (let i = 0; i < entity.balls.length; i++) {
+                            const ball = entity.balls[i];
+                            if (rectCircleColliding(ball, player)) {
+                                //player dead
+                                console.log(i);
+                                this.active = false;
+                            }
+                        };
+                    }
                 }
             }
         }
