@@ -28,10 +28,10 @@ export default class Map {
 
     isInBounds(node) {
         let unit = view.getMap().getUnitSize();
-        if (node.pos.x * unit < this.padding.x ||
-            (node.pos.x + node.width) * unit > (this.padding.x + (this.unit * this.width)) ||
-            node.pos.y * unit < this.padding.y ||
-            (node.pos.y + node.width) * unit > (this.padding.y + (this.unit * this.height))) {
+        if (node.pos.x * unit < 0 ||
+            (node.pos.x + node.width) * unit > this.unit * this.width ||
+            node.pos.y * unit < 0 ||
+            (node.pos.y + node.width) * unit > this.unit * this.height) {
             return false;
         } else {
             return true;

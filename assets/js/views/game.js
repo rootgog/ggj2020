@@ -5,11 +5,18 @@ import level1 from "../maps/level1.js";
 import Map from "./../classes/map.js";
 import player from "../classes/player.js";
 import {
-    rectCollision
+    rectCollision,
+    rectCircleColliding
 } from "../classes/functions.js";
 import {
     Pickupable
 } from "../classes/pickupables.js";
+import {
+    SpinningBallBar
+} from "../classes/obsticles.js";
+import {
+    gameLoop
+} from "../app.js";
 
 class Game extends View {
 
@@ -46,6 +53,16 @@ class Game extends View {
                         //give item to player
                         player.inventory.push(entity);
                     }
+                }
+                if (entity instanceof SpinningBallBar) {
+                    for (let i = 0; i < entity.balls.length; i++) {
+                        const ball = entity.balls[i];
+                        if (rectCircleColliding(ball, player)) {
+                            //player dead
+                            console.log(i);
+                            this.active = false;
+                        }
+                    };
                 }
             }
         }

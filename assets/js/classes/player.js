@@ -9,14 +9,14 @@ class Player {
         window.addEventListener("keydown", this.keyDown.bind(this));
         window.addEventListener("keyup", this.keyUp.bind(this));
         this.pos = {
-            x: 1,
-            y: 1
+            x: 7,
+            y: 5.5
         }
         this.up = 0;
         this.right = 0;
-        this.speed = 3;
-        this.width = 0.2;
-        this.height = 0.2;
+        this.speed = 10;
+        this.width = 0.5;
+        this.height = 0.5;
         this.dir = 0;
         this.inventory = [];
     }

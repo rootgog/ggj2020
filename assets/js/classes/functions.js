@@ -10,25 +10,26 @@ let rectCollision = (rect1, rect2) => {
 }
 
 let rectCircleColliding = (circle, rect) => {
-    var distX = Math.abs(circle.pos.x - rect.pos.x - rect.w / 2);
-    var distY = Math.abs(circle.pos.y - rect.pos.y - rect.h / 2);
+    var distX = Math.abs(circle.pos.x - rect.pos.x - rect.width / 2);
+    var distY = Math.abs(circle.pos.y - rect.pos.y - rect.height / 2);
 
-    if (distX > (rect.w / 2 + circle.r)) {
+    if (distX > (rect.width / 2 + circle.r)) {
         return false;
     }
-    if (distY > (rect.h / 2 + circle.r)) {
+    if (distY > (rect.height / 2 + circle.r)) {
         return false;
     }
 
-    if (distX <= (rect.w / 2)) {
+    if (distX <= (rect.width / 2)) {
         return true;
     }
-    if (distY <= (rect.h / 2)) {
+    if (distY <= (rect.height / 2)) {
         return true;
     }
 
-    var dx = distX - rect.w / 2;
-    var dy = distY - rect.h / 2;
+    // also test for corner collisions
+    var dx = distX - rect.width / 2;
+    var dy = distY - rect.height / 2;
     return (dx * dx + dy * dy <= (circle.r * circle.r));
 }
 

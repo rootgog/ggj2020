@@ -1,6 +1,7 @@
 import {
     Game
 } from "./views/game.js";
+import player from "./classes/player.js";
 
 let canvas = document.getElementById("game");
 let ctx = canvas.getContext("2d");
@@ -33,7 +34,9 @@ let renderFrame = () => {
 
     view.draw();
 
-    requestAnimationFrame(renderFrame);
+    if (view.active) {
+        requestAnimationFrame(renderFrame);
+    }
 }
 
 gameLoop = requestAnimationFrame(renderFrame);

@@ -9,45 +9,71 @@ import {
 
 class SpinningBallBar {
     constructor({
-        x = 1.5,
-        y = 1.5,
-        balls = 5,
-        gap = 0.25,
-        speed = 150
+        x = 4,
+        y = 4,
+        ballscount = 5,
+        gap = 0.5,
+        speed = 100
     } = {}) {
         this.pos = {
             x: x,
             y: y
         }
-        this.balls = balls;
+        this.ballscount = ballscount;
         this.gap = gap;
         this.speed = speed;
         this.rotation = 0;
+        this.balls = [];
+        for (let b = 0; b < this.ballscount; b++) {
+            this.balls.push(new Ball());
+        }
+        this.calculateBallPositions();
     }
 
     updateRotation() {
         this.rotation += this.speed * deltaTime;
     }
 
-    draw() {
-        let gap = this.gap;
-        for (let i = 0; i < this.balls; i++) {
+    calculateBallPositions() {
+        let gap = 0;
+        for (let i = 0; i < this.ballscount; i++) {
             let ballcoords = pointFromPoint(this.pos.x, this.pos.y, gap, this.rotation);
-            Ball.draw(ballcoords.x, ballcoords.y, 0.05);
+            this.balls[i].pos = ballcoords;
             gap += this.gap;
         }
+    }
+
+    draw() {
+        this.balls.forEach(ball => {
+            ball.draw();
+        });
         this.updateRotation();
+        this.calculateBallPositions();
     }
 }
 
 class Ball {
-    static draw(x, y, r) {
+
+    constructor({
+        x = 1,
+        y = 1,
+        r = 0.2
+    } = {}) {
+        this.pos = {
+            x: x,
+            y: y
+        }
+        this.r = r;
+    }
+
+    draw() {
 
         let unit = view.getMap().getUnitSize();
+        let padding = view.getMap().getPadding();
 
         ctx.beginPath();
-        ctx.fillStyle = 'lightblue';
-        ctx.arc(x * unit, y * unit, r * unit, 0, 2 * Math.PI);
+        ctx.fillStyle = 'red';
+        ctx.arc((this.pos.x * unit) + padding.x, (this.pos.y * unit) + padding.y, this.r * unit, 0, 2 * Math.PI);
         ctx.fill();
     }
 }
