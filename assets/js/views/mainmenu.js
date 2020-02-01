@@ -19,7 +19,7 @@ export default class MainMenu extends View {
     draw() {
         let overlay = document.getElementById("overlay");
         overlay.innerHTML = /* html */ `
-        <div id="mainmenu">
+        <div id="mainmenu" class="menu">
             <h1>Bridge Repair</h1>
             <button id="start">Start Game</button>
             <button id="help">Help</button>
@@ -35,7 +35,7 @@ export default class MainMenu extends View {
                     break;
                 case "help":
                     overlay.innerHTML = /* html */ `
-                    <div id="mainmenu">
+                    <div id="mainmenu" class="menu">
                         <h1>Help</h1>
                         <p>The game is simple, collect the bridge pieces and take them to the bridge, cross to the next level.</p>
                         <h2>Controls</h2>
@@ -55,7 +55,7 @@ export default class MainMenu extends View {
                     break;
                 case "info":
                     overlay.innerHTML = /* html */ `
-                    <div id="mainmenu">
+                    <div id="mainmenu" class="menu">
                         <h1>Info</h1>
                         <p>Game Made for Global Game Jam 2020 by George Bishop</p>
                         <a href="https://georgebishop.me" class="btn">My Portfolio</a>

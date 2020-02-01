@@ -10,4 +10,8 @@ export class View {
     draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
+
+    static clearCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
 }

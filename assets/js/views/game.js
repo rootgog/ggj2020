@@ -20,18 +20,30 @@ import {
     BridgePiece
 } from "../classes/bridge.js";
 import level2 from "../maps/level2.js";
+import {
+    setView,
+    renderFrame,
+    view,
+    levels
+} from "../app.js";
+import DeathScreen from "./deathscreen.js";
 
 class Game extends View {
 
-    constructor() {
+    constructor({
+        level = 0
+    } = {}) {
         super();
         this.map;
-        this.levels = [level1, level2];
-        this.level = 0;
+        this.levelint = level;
+        this.level = levels[level]();
 
-        this.entities = this.levels[this.level].entities;
+        this.entities = this.level.entities;
+        this.setMap(new Map(this.level.map));
+    }
 
-        this.setMap(new Map(this.levels[this.level].map));
+    getLevel() {
+        return this.levelint;
     }
 
     getMap() {
@@ -40,7 +52,7 @@ class Game extends View {
 
     setMap(map) {
         this.map = map;
-        this.levels[this.level].init();
+        this.level.init();
     }
 
     checkPlayerCollisions() {
@@ -77,7 +89,7 @@ class Game extends View {
 
                         //pop off entity from entities array
                         if (entity instanceof Pickupable) {
-                            this.entities.splice(i, 1);
+                            this.level.entities.splice(i, 1);
 
 
                             //give item to player
@@ -89,8 +101,11 @@ class Game extends View {
                             const ball = entity.balls[i];
                             if (rectCircleColliding(ball, player)) {
                                 //player dead
-                                console.log(i);
                                 this.active = false;
+                                setView(new DeathScreen({
+                                    level: this.levelint
+                                }));
+                                renderFrame();
                             }
                         };
                     }
@@ -110,27 +125,25 @@ class Game extends View {
 
             //if colliding pickup else draw
 
-            entity.draw();
+            if (this.active) {
+                entity.draw();
+            }
         });
 
-        if (this.levels[this.level].winCondition()) {
+        if (this.level.winCondition()) {
             //this.active = false; //stop animation
 
-            if (this.levels.length - 1 == this.level) {
+            if (levels.length - 1 == this.level) {
                 console.log("all levels done");
             } else {
 
                 //load next level
 
-                this.level++;
+                this.levelint++;
 
-                let nextLevel = this.levels[this.level];
-
-                this.entities = nextLevel.entities;
-
-                this.setMap(new Map(nextLevel.map));
-
-                nextLevel.init();
+                setView(new Game({
+                    level: this.levelint
+                }));
 
             }
         }
