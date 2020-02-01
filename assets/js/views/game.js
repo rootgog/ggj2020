@@ -103,11 +103,11 @@ class Game extends View {
         //draw elements
         this.map.draw();
 
+        this.checkPlayerCollisions();
+
         this.entities.forEach(entity => {
 
             //if colliding pickup else draw
-
-            this.checkPlayerCollisions();
 
             entity.draw();
         });

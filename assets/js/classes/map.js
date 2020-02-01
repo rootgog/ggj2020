@@ -3,6 +3,13 @@ import {
     ctx,
     view
 } from "../app.js";
+import {
+    rectCollision
+} from "./functions.js";
+import player from "./player.js";
+import {
+    Water
+} from "./tiles.js";
 
 export default class Map {
     constructor(map) {

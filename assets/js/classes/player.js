@@ -10,6 +10,9 @@ import {
 import {
     Bridge
 } from "./bridge.js";
+import {
+    Water
+} from "./tiles.js";
 
 class Player {
     constructor({
@@ -97,6 +100,26 @@ class Player {
 
             let moveLegal = true;
 
+            for (let r = 0; r < view.getMap().map.length; r++) {
+                const row = view.getMap().map[r];
+                for (let c = 0; c < row.length; c++) {
+                    const cell = row[c];
+                    if (cell instanceof Water) {
+                        let celldata = {
+                            pos: {
+                                x: c,
+                                y: r
+                            },
+                            width: 1,
+                            height: 1
+                        }
+                        if (rectCollision(celldata, newpos)) {
+                            moveLegal = false;
+                        }
+                    }
+                }
+            }
+
             view.entities.forEach(entity => {
                 if (entity != player) {
                     if (entity instanceof Bridge) {
@@ -106,7 +129,7 @@ class Player {
                             }
                         } else {
                             if (rectCollision(entity, newpos)) {
-                                console.log("colliding");
+                                moveLegal = true;
                                 //no out on x axis
                                 if (newpos.pos.x < entity.pos.x ||
                                     newpos.pos.x + newpos.width > entity.pos.x + entity.width) {
@@ -117,6 +140,7 @@ class Player {
                     }
                 }
             });
+
 
             if (moveLegal) {
                 this.pos.x = newpos.pos.x;
