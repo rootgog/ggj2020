@@ -39,6 +39,7 @@ class Game extends View {
 
     setMap(map) {
         this.map = map;
+        this.levels[this.level].init();
     }
 
     checkPlayerCollisions() {
@@ -46,7 +47,7 @@ class Game extends View {
             const entity = this.entities[i];
             if (entity != player) {
                 if (entity instanceof Bridge) {
-                    if (withinBorderRectRect(player, entity, 0.1)) {
+                    if (withinBorderRectRect(player, entity, 1)) {
 
                         let bridgepieces = player.inventory.filter((item) => item instanceof BridgePiece);
 
@@ -66,9 +67,7 @@ class Game extends View {
 
                         }
 
-                        if (player.pos.x > entity.pos.x && player.pos.x + player.width < entity.pos.x + entity.width) {
-                            //console.log("can walk");
-                        }
+
 
 
                     }

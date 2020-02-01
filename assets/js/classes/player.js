@@ -12,12 +12,15 @@ import {
 } from "./bridge.js";
 
 class Player {
-    constructor() {
+    constructor({
+        x = 1,
+        y = 1
+    } = {}) {
         window.addEventListener("keydown", this.keyDown.bind(this));
         window.addEventListener("keyup", this.keyUp.bind(this));
         this.pos = {
-            x: 7,
-            y: 5.5
+            x: x,
+            y: y
         }
         this.up = 0;
         this.right = 0;
@@ -34,7 +37,7 @@ class Player {
         let coords = unitToCanvasConversionRect(this.pos.x, this.pos.y, this.width, this.height);
 
         ctx.beginPath();
-        ctx.fillStyle = 'red';
+        ctx.fillStyle = 'black';
         ctx.rect(coords.x, coords.y, coords.w, coords.h);
         ctx.fill();
     }
@@ -100,6 +103,15 @@ class Player {
                         if (!entity.completed) {
                             if (rectCollision(entity, newpos)) {
                                 moveLegal = false;
+                            }
+                        } else {
+                            if (rectCollision(entity, newpos)) {
+                                console.log("colliding");
+                                //no out on x axis
+                                if (newpos.pos.x < entity.pos.x ||
+                                    newpos.pos.x + newpos.width > entity.pos.x + entity.width) {
+                                    moveLegal = false;
+                                }
                             }
                         }
                     }

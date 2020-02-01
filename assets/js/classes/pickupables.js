@@ -8,8 +8,8 @@ import {
 class Pickupable {
     constructor({
         img = null,
-        width = 0.2,
-        height = 0.2,
+        width = 1,
+        height = 1,
         x = 1.5,
         y = 1.5
     } = {}) {
@@ -26,7 +26,7 @@ class Pickupable {
         let coords = unitToCanvasConversionRect(this.pos.x, this.pos.y, this.width, this.height);
 
         ctx.beginPath();
-        ctx.fillStyle = 'darkgreen';
+        ctx.fillStyle = 'saddlebrown';
         ctx.rect(coords.x, coords.y, coords.w, coords.h);
         ctx.fill();
     }

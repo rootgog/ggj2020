@@ -68,15 +68,12 @@ export default class Map {
                 const cell = row[c];
 
 
-                ctx.beginPath();
-                ctx.fillStyle = cell; //color for now
+                cell.pos.x = c;
+                cell.pos.y = r;
+                cell.width = 1;
+                cell.height = 1;
 
-                let x = c * this.unit;
-                let y = r * this.unit;
-
-                ctx.rect(x + this.padding.x, y + this.padding.y, this.unit, this.unit);
-
-                ctx.fill();
+                cell.draw();
 
             }
         }
