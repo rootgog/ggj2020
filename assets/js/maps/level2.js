@@ -48,7 +48,7 @@ export default {
             y: 8
         }),
         new BridgePiece({
-            x: 2,
+            x: 10,
             y: 17
         }),
         new Bridge({

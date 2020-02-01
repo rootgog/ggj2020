@@ -19,13 +19,14 @@ import {
     Bridge,
     BridgePiece
 } from "../classes/bridge.js";
+import level2 from "../maps/level2.js";
 
 class Game extends View {
 
     constructor() {
         super();
         this.map;
-        this.levels = [level1];
+        this.levels = [level1, level2];
         this.level = 0;
 
         this.entities = this.levels[this.level].entities;
@@ -111,6 +112,29 @@ class Game extends View {
 
             entity.draw();
         });
+
+        if (this.levels[this.level].winCondition()) {
+            //this.active = false; //stop animation
+
+            if (this.levels.length - 1 == this.level) {
+                console.log("all levels done");
+            } else {
+
+                //load next level
+
+                this.level++;
+
+                let nextLevel = this.levels[this.level];
+
+                this.entities = nextLevel.entities;
+
+                this.setMap(new Map(nextLevel.map));
+
+                nextLevel.init();
+
+
+            }
+        }
     }
 }
 
