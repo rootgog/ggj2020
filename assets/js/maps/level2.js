@@ -41,27 +41,39 @@ export default () => {
         ],
         entities: [
             new BridgePiece({
-                x: 30,
+                x: 5,
                 y: 15
             }),
             new BridgePiece({
-                x: 10,
-                y: 8
-            }),
-            new BridgePiece({
-                x: 10,
-                y: 17
+                x: 4,
+                y: 12
             }),
             new Bridge({
                 x: 19.5,
                 y: 3,
-                h: 5
+                h: 5,
+                piecesRequired: 2
             }),
             new SpinningBallBar({
-                x: 10,
-                y: 13.5,
-                ballscount: 7,
-                gap: 1
+                x: 7,
+                y: 14,
+                ballscount: 8,
+                gap: 0.9
+            }),
+            new SpinningBallBar({
+                x: 7,
+                y: 14,
+                ballscount: 8,
+                gap: 0.9,
+                rotation: 180
+            }),
+            new SpinningBallBar({
+                x: 15,
+                y: 10,
+                ballscount: 8,
+                gap: 0.9,
+                rotation: 180,
+                clockwise: false
             }),
             player
         ],

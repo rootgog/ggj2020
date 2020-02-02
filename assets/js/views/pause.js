@@ -1,25 +1,22 @@
 import { View } from "../classes/view.js";
-import { setView, renderFrame, view, overlay } from "../app.js";
+import { renderFrame, setView, overlay } from "../app.js";
 import MainMenu from "./mainmenu.js";
-import { Game } from "./game.js";
 
-export default class DeathScreen extends View {
-  constructor({ level } = {}) {
+export default class PauseScreen extends View {
+  constructor(game) {
     super();
     this.active = false;
-    this.level = level;
+    this.game = game;
+    View.clearCanvas();
     this.clickhandlerEvt = this.clickHandler.bind(this);
     overlay.addEventListener("click", this.clickhandlerEvt);
   }
   clickHandler(e) {
     switch (e.target.id) {
-      case "restart":
+      case "resume":
         overlay.innerHTML = "";
-        setView(
-          new Game({
-            level: this.level
-          })
-        );
+        setView(this.game);
+        this.game.active = true;
         overlay.removeEventListener("click", this.clickhandlerEvt);
         renderFrame();
         break;
@@ -32,11 +29,10 @@ export default class DeathScreen extends View {
     }
   }
   draw() {
-    View.clearCanvas();
     overlay.innerHTML = /* html */ `
-        <div id="deathscreen" class="menu">
-            <h1>You Died</h1>
-            <button id="restart">Restart Level</button>
+        <div id="pause" class="menu">
+            <h1>Paused</h1>
+            <button id="resume">Resume</button>
             <button id="main">Main Menu</button>
         </div>`;
   }

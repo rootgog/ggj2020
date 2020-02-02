@@ -40,19 +40,65 @@ button,
     width: 300px;
 }
 
-#controls {
+.controls {
     display: grid;
-    grid-template-columns: 40px 40px 40px;
+    grid-template-columns: 1fr 40px 40px 40px 40px 40px 40px 40px 1fr;
     grid-template-rows: 40px 40px;
-    left: 50%;
-    transform: translateX(-65px);
-    position: relative;
+    grid-template-areas: ". . w . or . up . ."
+        ". a s d or lft dwn rght .";
     gap: 5px;
+    width: 100%;
 }
 
-#controls>div.key {
+.key {
+    height: 40px;
+    width: 40px;
     background: lightgray;
     line-height: 40px;
+}
+
+.esc {
+    display: inline-block;
+    width: 40px;
+    margin: 0 auto;
+}
+
+.controls>.or {
+    font-weight: bold;
+    line-height: 60px;
+    grid-area: or;
+}
+
+.key.w {
+    grid-area: w;
+}
+
+.key.a {
+    grid-area: a;
+}
+
+.key.s {
+    grid-area: s;
+}
+
+.key.d {
+    grid-area: d;
+}
+
+.key.up {
+    grid-area: up;
+}
+
+.key.left {
+    grid-area: lft;
+}
+
+.key.down {
+    grid-area: dwn;
+}
+
+.key.right {
+    grid-area: rght;
 }
 
 @keyframes scaleUpDown {

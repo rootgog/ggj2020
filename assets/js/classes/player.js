@@ -32,6 +32,7 @@ class Player {
         this.height = 0.5;
         this.dir = 0;
         this.inventory = [];
+        this.maxInventory = 1;
     }
 
     draw() {
@@ -47,18 +48,22 @@ class Player {
 
     keyDown(e) {
         switch (e.key.toLowerCase()) {
+            case "arrowup":
             case "w":
                 //up
                 this.up = -this.speed;
                 break;
+            case "arrowleft":
             case "a":
                 //left
                 this.right = -this.speed;
                 break;
+            case "arrowdown":
             case "s":
                 //down
                 this.up = this.speed;
                 break;
+            case "arrowright":
             case "d":
                 //right
                 this.right = this.speed;
@@ -67,18 +72,22 @@ class Player {
     }
     keyUp(e) {
         switch (e.key.toLowerCase()) {
+            case "arrowup":
             case "w":
                 //up
                 this.up = 0;
                 break;
+            case "arrowleft":
             case "a":
                 //left
                 this.right = 0;
                 break;
+            case "arrowdown":
             case "s":
                 //down
                 this.up = 0;
                 break;
+            case "arrowright":
             case "d":
                 //right
                 this.right = 0;

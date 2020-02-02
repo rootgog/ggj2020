@@ -3,7 +3,6 @@ import {
     unitToCanvasConversionArc
 } from "./functions.js";
 import {
-    view,
     ctx,
     deltaTime
 } from "../app.js";
@@ -14,7 +13,9 @@ class SpinningBallBar {
         y = 4,
         ballscount = 5,
         gap = 0.5,
-        speed = 100
+        speed = 100,
+        rotation = 0,
+        clockwise = true
     } = {}) {
         this.pos = {
             x: x,
@@ -23,8 +24,9 @@ class SpinningBallBar {
         this.ballscount = ballscount;
         this.gap = gap;
         this.speed = speed;
-        this.rotation = 0;
+        this.rotation = rotation;
         this.balls = [];
+        this.clockwise = clockwise;
         for (let b = 0; b < this.ballscount; b++) {
             this.balls.push(new Ball());
         }
@@ -32,7 +34,11 @@ class SpinningBallBar {
     }
 
     updateRotation() {
-        this.rotation += this.speed * deltaTime;
+        if (this.clockwise) {
+            this.rotation += this.speed * deltaTime;
+        } else {
+            this.rotation -= this.speed * deltaTime;
+        }
     }
 
     calculateBallPositions() {
