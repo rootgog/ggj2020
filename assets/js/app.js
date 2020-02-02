@@ -20,6 +20,21 @@ let setCanvasFullScreen = () => {
 
 //init
 
+let sounds = {
+    pickup: new Audio("assets/audio/pickup.wav"),
+    addpiece: new Audio("assets/audio/bridgepieceadded.wav"),
+    completelevel: new Audio("assets/audio/completelevel.wav"),
+    click: new Audio("assets/audio/click.wav"),
+    menusoundtrack: new Audio("assets/audio/menu.wav"),
+    gameLoop: new Audio("assets/audio/gameloop.wav")
+};
+
+window.addEventListener("click", e => {
+    if (e.target.localName == "button") {
+        sounds.click.play();
+    }
+});
+
 setCanvasFullScreen();
 
 let view = new MainMenu();
@@ -61,5 +76,6 @@ export {
     renderFrame,
     setView,
     levels,
-    overlay
+    overlay,
+    sounds
 };

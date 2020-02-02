@@ -46,7 +46,7 @@ export default () => {
                 y: 15
             }),
             new BridgePiece({
-                x: 4,
+                x: 35,
                 y: 12
             }),
             new Bridge({
@@ -59,8 +59,8 @@ export default () => {
                 angle: 0,
                 direction: 90,
                 x: 1,
-                y: 8,
-                distance: 12,
+                y: 7.5,
+                distance: 13,
                 speed: 8,
                 ballscount: 7,
                 gap: 2.9
@@ -69,31 +69,23 @@ export default () => {
                 angle: 0,
                 direction: 270,
                 x: 2.5,
-                y: 20,
-                distance: 12,
-                speed: 12,
+                y: 20.5,
+                distance: 13,
+                speed: 4,
                 ballscount: 6,
                 gap: 2.9
             }),
-            new ScrollingBallBar({
-                angle: 180,
-                direction: 90,
-                x: 39.5,
-                y: 8,
-                distance: 12,
-                speed: 12,
-                ballscount: 6,
-                gap: 2.9
+            new SpinningBallBar({
+                x: 30,
+                y: 17,
+                ballscount: 5,
+                gap: 1
             }),
-            new ScrollingBallBar({
-                angle: 180,
-                direction: 270,
-                x: 41,
-                y: 20,
-                distance: 12,
-                speed: 8,
-                ballscount: 6,
-                gap: 2.9
+            new SpinningBallBar({
+                x: 30,
+                y: 12,
+                ballscount: 5,
+                gap: 1
             }),
             player
         ],

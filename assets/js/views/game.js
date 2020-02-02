@@ -26,7 +26,8 @@ import {
     levels,
     gameLoop,
     overlay,
-    ctx
+    ctx,
+    sounds
 } from "../app.js";
 import DeathScreen from "./deathscreen.js";
 import CompleteScreen from "./completeScreen.js";
@@ -48,16 +49,20 @@ class Game extends View {
 
         this.keydownhandler = this.keydown.bind(this);
         window.addEventListener("keydown", this.keydownhandler);
+
+        this.soundtrack = sounds.gameLoop;
+        this.soundtrack.loop = true;
+        this.soundtrack.play();
     }
 
     keydown(e) {
         if (e.key.toLowerCase() == "escape") {
             if (this.active) {
                 this.active = false;
-                window.removeEventListener("keydown", this.keydownhandler);
                 window.removeEventListener("resize", this.map.resizeHandler);
                 cancelAnimationFrame(gameLoop);
                 setView(new PauseScreen(this));
+                this.soundtrack.pause();
             }
         }
     }
@@ -92,6 +97,8 @@ class Game extends View {
                             player.inventory.splice(player.inventory.indexOf(piece), 1);
 
                             entity.addPiece();
+
+                            sounds.addpiece.play();
                         }
                     }
                 } else {
@@ -102,6 +109,8 @@ class Game extends View {
                                 this.level.entities.splice(i, 1);
                                 //give item to player
                                 player.inventory.push(entity);
+
+                                sounds.pickup.play();
                             }
                         }
                     }
@@ -119,6 +128,7 @@ class Game extends View {
                                         level: this.levelint
                                     })
                                 );
+                                this.soundtrack.pause();
                                 renderFrame();
                             }
                         }
@@ -146,6 +156,8 @@ class Game extends View {
         if (this.level.winCondition()) {
             //this.active = false; //stop animation
 
+            sounds.completelevel.play();
+
             if (levels.length - 1 == this.levelint) {
                 this.active = false;
                 cancelAnimationFrame(gameLoop);
@@ -153,6 +165,7 @@ class Game extends View {
                 window.removeEventListener("resize", this.map.resizeHandler);
                 setView(new CompleteScreen());
                 renderFrame();
+                this.soundtrack.pause();
 
                 console.log("all levels done");
             } else {
@@ -170,20 +183,30 @@ class Game extends View {
             }
         }
 
-        //draw inv
+        if (this.active) {
 
-        let coords = unitToCanvasConversionRect(this.map.width - 3, this.map.height - 3, 2.5, 2.5);
-        ctx.beginPath();
-        ctx.fillStyle = 'black';
-        ctx.rect(coords.x, coords.y, coords.w, coords.h);
-        ctx.fill();
+            //draw inv
 
-        player.inventory.forEach(item => {
-            item.draw({
-                x: this.getMap().width - 2.25,
-                y: this.getMap().height - 2.25
-            })
-        });
+            let coords = unitToCanvasConversionRect(
+                this.map.width - 3,
+                this.map.height - 3,
+                2.5,
+                2.5
+            );
+            ctx.beginPath();
+            ctx.globalAlpha = 0.5;
+            ctx.fillStyle = "black";
+            ctx.rect(coords.x, coords.y, coords.w, coords.h);
+            ctx.fill();
+            ctx.globalAlpha = 1;
+
+            player.inventory.forEach(item => {
+                item.draw({
+                    x: this.getMap().width - 2.25,
+                    y: this.getMap().height - 2.25
+                });
+            });
+        }
     }
 }
 

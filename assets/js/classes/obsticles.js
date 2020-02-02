@@ -4,7 +4,8 @@ import {
 } from "./functions.js";
 import {
     ctx,
-    deltaTime
+    deltaTime,
+    view
 } from "../app.js";
 
 class Obsticle {
@@ -102,14 +103,6 @@ class ScrollingBallBar extends Obsticle {
     }
 
     calculateBallPositions() {
-        /*
-        if (this.distanceTraveled <= this.distance) {
-            this.distanceTraveled -= this.speed * deltaTime;
-        }
-
-        if (this.distanceTraveled >= 0) {
-            this.distanceTraveled += this.speed * deltaTime;
-        }*/
 
         if (this.returning) {
             this.distanceTraveled -= this.speed * deltaTime;

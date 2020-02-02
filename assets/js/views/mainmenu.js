@@ -1,15 +1,17 @@
 import {
-    View
+    View,
+    Menu
 } from "../classes/view.js";
 import {
     renderFrame,
-    setView
+    setView,
+    sounds
 } from "../app.js";
 import {
     Game
 } from "./game.js";
 
-export default class MainMenu extends View {
+export default class MainMenu extends Menu {
     constructor() {
         super();
         this.active = false;
@@ -21,11 +23,14 @@ export default class MainMenu extends View {
         switch (e.target.id) {
             case "start":
                 overlay.innerHTML = "";
-                setView(new Game({
-                    level: 2
-                }));
+                setView(
+                    new Game({
+                        level: 2
+                    })
+                );
                 overlay.removeEventListener("click", this.clickhandlerEvt);
                 renderFrame();
+                sounds.menusoundtrack.pause();
                 break;
             case "help":
                 overlay.innerHTML = /* html */ `
