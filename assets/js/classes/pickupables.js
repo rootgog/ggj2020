@@ -21,9 +21,14 @@ class Pickupable {
         this.width = width;
         this.height = height;
     }
-    draw() {
+    draw({
+        x = this.pos.x,
+        y = this.pos.y,
+        w = this.width,
+        h = this.height
+    } = {}) {
 
-        let coords = unitToCanvasConversionRect(this.pos.x, this.pos.y, this.width, this.height);
+        let coords = unitToCanvasConversionRect(x, y, w, h);
 
         ctx.beginPath();
         ctx.fillStyle = 'saddlebrown';

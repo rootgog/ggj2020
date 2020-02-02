@@ -1,7 +1,6 @@
 import player from "../classes/player.js";
 import {
-    SpinningBallBar,
-    ScrollingBallBar
+    SpinningBallBar
 } from "../classes/obsticles.js";
 import {
     Bridge,
@@ -45,31 +44,42 @@ export default () => {
                 x: 5,
                 y: 15
             }),
+            new BridgePiece({
+                x: 4,
+                y: 12
+            }),
             new Bridge({
-                x: 30,
+                x: 19.5,
                 y: 3,
                 h: 5,
-                piecesRequired: 1
+                piecesRequired: 2
             }),
             new SpinningBallBar({
-                x: 10,
-                y: 13.5,
-                ballscount: 7,
-                gap: 1,
-                rotation: 270
-            }),
-            new SpinningBallBar({
-                x: 20,
+                x: 7,
                 y: 14,
                 ballscount: 8,
-                gap: 1,
-                speed: 75
+                gap: 0.9
+            }),
+            new SpinningBallBar({
+                x: 7,
+                y: 14,
+                ballscount: 8,
+                gap: 0.9,
+                rotation: 180
+            }),
+            new SpinningBallBar({
+                x: 15,
+                y: 10,
+                ballscount: 8,
+                gap: 0.9,
+                rotation: 180,
+                clockwise: false
             }),
             player
         ],
         init: () => {
             player.pos = {
-                x: 30,
+                x: 21,
                 y: 18
             }
         },
