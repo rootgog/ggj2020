@@ -1,25 +1,34 @@
-import { View } from "../classes/view.js";
-import { renderFrame, setView } from "../app.js";
-import { Game } from "./game.js";
+import {
+    View
+} from "../classes/view.js";
+import {
+    renderFrame,
+    setView
+} from "../app.js";
+import {
+    Game
+} from "./game.js";
 
 export default class MainMenu extends View {
-  constructor() {
-    super();
-    this.active = false;
-    this.clickhandlerEvt = this.clickHandler.bind(this);
-    overlay.addEventListener("click", this.clickhandlerEvt);
-  }
+    constructor() {
+        super();
+        this.active = false;
+        this.clickhandlerEvt = this.clickHandler.bind(this);
+        overlay.addEventListener("click", this.clickhandlerEvt);
+    }
 
-  clickHandler(e) {
-    switch (e.target.id) {
-      case "start":
-        overlay.innerHTML = "";
-        setView(new Game());
-        overlay.removeEventListener("click", this.clickhandlerEvt);
-        renderFrame();
-        break;
-      case "help":
-        overlay.innerHTML = /* html */ `
+    clickHandler(e) {
+        switch (e.target.id) {
+            case "start":
+                overlay.innerHTML = "";
+                setView(new Game({
+                    level: 2
+                }));
+                overlay.removeEventListener("click", this.clickhandlerEvt);
+                renderFrame();
+                break;
+            case "help":
+                overlay.innerHTML = /* html */ `
                     <div id="mainmenu" class="menu">
                         <h1>Help</h1>
                         <p>The game is simple, collect the bridge pieces and take them to the bridge, cross to the next level.</p>
@@ -40,12 +49,12 @@ export default class MainMenu extends View {
                         <div>Pause:<span class="key esc">ESC</span></div>
                         <button id="main">Main Menu</button>
                     </div>`;
-        break;
-      case "main":
-        this.draw();
-        break;
-      case "info":
-        overlay.innerHTML = /* html */ `
+                break;
+            case "main":
+                this.draw();
+                break;
+            case "info":
+                overlay.innerHTML = /* html */ `
                     <div id="mainmenu" class="menu">
                         <h1>Info</h1>
                         <p>Game Made for <a href="https://globalgamejam.org/2020/games/bridge-repair-1"></a>Global Game Jam 2020 by George Bishop</p>
@@ -53,18 +62,18 @@ export default class MainMenu extends View {
                         <a href="https://github.com/rootgog" class="btn">My GitHub</a>
                         <button id="main">Main Menu</button>
                     </div>`;
-        break;
+                break;
+        }
     }
-  }
 
-  draw() {
-    View.clearCanvas();
-    overlay.innerHTML = /* html */ `
+    draw() {
+        View.clearCanvas();
+        overlay.innerHTML = /* html */ `
         <div id="mainmenu" class="menu">
             <h1>Bridge Repair</h1>
             <button id="start">Start Game</button>
             <button id="help">Help</button>
             <button id="info">Info</button>
         </div>`;
-  }
+    }
 }

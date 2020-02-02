@@ -13,7 +13,8 @@ import {
     Pickupable
 } from "../classes/pickupables.js";
 import {
-    SpinningBallBar
+    SpinningBallBar,
+    Obsticle
 } from "../classes/obsticles.js";
 import {
     Bridge,
@@ -104,7 +105,7 @@ class Game extends View {
                             }
                         }
                     }
-                    if (entity instanceof SpinningBallBar) {
+                    if (entity instanceof Obsticle) {
                         for (let i = 0; i < entity.balls.length; i++) {
                             const ball = entity.balls[i];
                             if (rectCircleColliding(ball, player)) {

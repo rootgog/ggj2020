@@ -7,7 +7,11 @@ import {
     deltaTime
 } from "../app.js";
 
-class SpinningBallBar {
+class Obsticle {
+
+}
+
+class SpinningBallBar extends Obsticle {
     constructor({
         x = 4,
         y = 4,
@@ -17,6 +21,7 @@ class SpinningBallBar {
         rotation = 0,
         clockwise = true
     } = {}) {
+        super();
         this.pos = {
             x: x,
             y: y
@@ -60,7 +65,7 @@ class SpinningBallBar {
 }
 
 
-class ScrollingBallBar {
+class ScrollingBallBar extends Obsticle {
     constructor({
         x = 4,
         y = 4,
@@ -72,6 +77,7 @@ class ScrollingBallBar {
         direction = 0,
         angle = 90
     } = {}) {
+        super();
         this.startPos = {
             x: x,
             y: y
@@ -96,30 +102,33 @@ class ScrollingBallBar {
     }
 
     calculateBallPositions() {
+        /*
+        if (this.distanceTraveled <= this.distance) {
+            this.distanceTraveled -= this.speed * deltaTime;
+        }
 
-
-        let distance = this.speed * deltaTime;
-
+        if (this.distanceTraveled >= 0) {
+            this.distanceTraveled += this.speed * deltaTime;
+        }*/
 
         if (this.returning) {
-            this.distanceTraveled -= distance;
+            this.distanceTraveled -= this.speed * deltaTime;
         } else {
-
-            this.distanceTraveled += distance;
+            this.distanceTraveled += this.speed * deltaTime;
         }
 
         if (this.distanceTraveled > this.distance && !this.returning) {
             //spin round
-            this.direction += 180;
+            this.distanceTraveled = this.distance;
             this.returning = true;
         }
 
         if (this.distanceTraveled < 0 && this.returning) {
-            this.direction -= 180;
             this.returning = false;
+            this.distanceTraveled = 0;
         }
 
-        let barpos = pointFromPoint(this.pos.x, this.pos.y, distance, this.direction);
+        let barpos = pointFromPoint(this.startPos.x, this.startPos.y, this.distanceTraveled, this.direction);
         this.pos = barpos;
 
         let gap = 0;
@@ -165,6 +174,7 @@ class Ball {
 }
 
 export {
+    Obsticle,
     SpinningBallBar,
     ScrollingBallBar
 }
