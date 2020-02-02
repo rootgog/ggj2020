@@ -5,7 +5,8 @@ import {
 import {
     ctx,
     deltaTime,
-    view
+    view,
+    sprites
 } from "../app.js";
 
 class Obsticle {
@@ -156,12 +157,9 @@ class Ball {
     }
 
     draw() {
-
         let coords = unitToCanvasConversionArc(this.pos.x, this.pos.y, this.r);
-
         ctx.beginPath();
-        ctx.fillStyle = 'red';
-        ctx.arc(coords.x, coords.y, coords.r, 0, 2 * Math.PI);
+        ctx.drawImage(sprites.fireball, coords.x - coords.r, coords.y - coords.r, coords.r * 2, coords.r * 2);
         ctx.fill();
     }
 }

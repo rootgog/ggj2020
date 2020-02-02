@@ -2,7 +2,8 @@ import {
     unitToCanvasConversionRect
 } from "./functions.js";
 import {
-    ctx
+    ctx,
+    sprites
 } from "../app.js";
 
 class Tile {
@@ -24,8 +25,7 @@ class Water extends Tile {
         let coords = unitToCanvasConversionRect(this.pos.x, this.pos.y, this.width, this.height);
 
         ctx.beginPath();
-        ctx.fillStyle = 'blue';
-        ctx.rect(coords.x, coords.y, coords.w, coords.h);
+        ctx.drawImage(sprites.water, coords.x, coords.y, coords.w, coords.h);
         ctx.fill();
     }
 }
@@ -35,8 +35,7 @@ class Grass extends Tile {
         let coords = unitToCanvasConversionRect(this.pos.x, this.pos.y, this.width, this.height);
 
         ctx.beginPath();
-        ctx.fillStyle = 'green';
-        ctx.rect(coords.x, coords.y, coords.w, coords.h);
+        ctx.drawImage(sprites.grass, coords.x, coords.y, coords.w, coords.h);
         ctx.fill();
     }
 }

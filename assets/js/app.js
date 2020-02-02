@@ -29,6 +29,31 @@ let sounds = {
     gameLoop: new Audio("assets/audio/gameloop.wav")
 };
 
+let bridge = new Image();
+bridge.src = `./assets/img/bridge.png`;
+let brokenbridge = new Image();
+brokenbridge.src = `./assets/img/bridge-broken.png`;
+let grass = new Image();
+grass.src = `./assets/img/grass.png`;
+let water = new Image();
+water.src = `./assets/img/water.png`;
+let sticks = new Image();
+sticks.src = `./assets/img/sticks.png`;
+let fireball = new Image();
+fireball.src = `./assets/img/fire-ball.png`;
+let player = new Image();
+player.src = `./assets/img/player.png`;
+
+let sprites = {
+    bridge: bridge,
+    grass: grass,
+    water: water,
+    sticks: sticks,
+    brokenbridge: brokenbridge,
+    fireball: fireball,
+    player: player
+}
+
 window.addEventListener("click", e => {
     if (e.target.localName == "button") {
         sounds.click.play();
@@ -77,5 +102,6 @@ export {
     setView,
     levels,
     overlay,
-    sounds
+    sounds,
+    sprites
 };

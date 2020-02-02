@@ -75,7 +75,7 @@ export default class MainMenu extends Menu {
         <div id="mainmenu" class="menu">
             <h1>Bridge Repair</h1>
             <button id="start">Start Game</button>
-            <button id="help">Help</button>
+            <button id="help">How To Play</button>
             <button id="info">Info</button>
         </div>`;
     }

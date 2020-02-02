@@ -1,7 +1,8 @@
 import {
     ctx,
     deltaTime,
-    view
+    view,
+    sprites
 } from "../app.js";
 import {
     unitToCanvasConversionRect,
@@ -28,8 +29,8 @@ class Player {
         this.up = 0;
         this.right = 0;
         this.speed = 10;
-        this.width = 0.5;
-        this.height = 0.5;
+        this.width = 1;
+        this.height = 1;
         this.dir = 0;
         this.inventory = [];
         this.maxInventory = 1;
@@ -40,10 +41,31 @@ class Player {
 
         let coords = unitToCanvasConversionRect(this.pos.x, this.pos.y, this.width, this.height);
 
-        ctx.beginPath();
-        ctx.fillStyle = 'black';
-        ctx.rect(coords.x, coords.y, coords.w, coords.h);
-        ctx.fill();
+        let rotation = 0;
+
+        if (this.up == this.speed) {
+            //going down
+            rotation = 180;
+        }
+        if (this.up == -this.speed) {
+            //going up
+            rotation = 0;
+        }
+        if (this.right == this.speed) {
+            //going up
+            rotation = 90;
+        }
+        if (this.right == -this.speed) {
+            //going up
+            rotation = 270;
+        }
+
+        ctx.save();
+        ctx.translate(coords.x + (coords.w / 2), coords.y + (coords.h / 2));
+        ctx.rotate(rotation * Math.PI / 180);
+        ctx.drawImage(sprites.player, -(coords.w / 2), -(coords.h / 2), coords.w, coords.h);
+        ctx.restore();
+
     }
 
     keyDown(e) {

@@ -8,20 +8,12 @@ import {
   unitToCanvasConversionRect
 } from "../classes/functions.js";
 import { Pickupable } from "../classes/pickupables.js";
-import { SpinningBallBar, Obsticle } from "../classes/obsticles.js";
 import { Bridge, BridgePiece } from "../classes/bridge.js";
-import {
-  setView,
-  renderFrame,
-  levels,
-  gameLoop,
-  overlay,
-  ctx,
-  sounds
-} from "../app.js";
+import { setView, renderFrame, levels, gameLoop, ctx, sounds } from "../app.js";
 import DeathScreen from "./deathscreen.js";
 import CompleteScreen from "./completescreen.js";
 import PauseScreen from "./pause.js";
+import { Obsticle } from "../classes/obsticles.js";
 
 class Game extends View {
   constructor({ level = 0 } = {}) {

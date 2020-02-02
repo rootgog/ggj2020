@@ -2,7 +2,8 @@ import {
     unitToCanvasConversionRect
 } from "./functions.js";
 import {
-    ctx
+    ctx,
+    sprites
 } from "../app.js";
 import {
     Pickupable
@@ -29,8 +30,11 @@ class Bridge {
     draw() {
         let coords = unitToCanvasConversionRect(this.pos.x, this.pos.y, this.width, this.height);
         ctx.beginPath();
-        ctx.fillStyle = 'saddlebrown';
-        ctx.rect(coords.x, coords.y, coords.w, coords.h);
+        if (this.completed) {
+            ctx.drawImage(sprites.bridge, coords.x, coords.y, coords.w, coords.h);
+        } else {
+            ctx.drawImage(sprites.brokenbridge, coords.x, coords.y, coords.w, coords.h);
+        }
         ctx.fill();
     }
     addPiece() {
@@ -42,7 +46,19 @@ class Bridge {
 }
 
 class BridgePiece extends Pickupable {
+    draw({
+        x = this.pos.x,
+        y = this.pos.y,
+        w = this.width,
+        h = this.height
+    } = {}) {
 
+        let coords = unitToCanvasConversionRect(x, y, w, h);
+
+        ctx.beginPath();
+        ctx.drawImage(sprites.sticks, coords.x, coords.y, coords.w, coords.h);
+        ctx.fill();
+    }
 }
 
 export {
