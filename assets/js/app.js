@@ -5,6 +5,8 @@ import MainMenu from "./views/mainmenu.js";
 import level1 from "./maps/level1.js";
 import level2 from "./maps/level2.js";
 import level3 from "./maps/level3.js";
+import level4 from "./maps/level4.js";
+import level5 from "./maps/level5.js";
 
 let canvas = document.getElementById("game");
 let ctx = canvas.getContext("2d");
@@ -71,7 +73,7 @@ let setView = newView => {
 let deltaTime;
 let lastFrame = Date.now();
 
-let levels = [level1, level2, level3];
+let levels = [level1, level2, level3, level4, level5];
 
 let gameLoop;
 

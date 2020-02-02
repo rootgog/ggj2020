@@ -50,6 +50,8 @@ export default class MainMenu extends Menu {
                         </div>
                         <h4>Misc</h4>
                         <div>Pause:<span class="key esc">ESC</span></div>
+                        <h4>UI</h4>
+                        <p>Inventory is shown in the bottom right (one item at a time)</p>
                         <button id="main">Main Menu</button>
                     </div>`;
                 break;
