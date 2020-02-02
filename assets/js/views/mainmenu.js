@@ -24,9 +24,7 @@ export default class MainMenu extends Menu {
             case "start":
                 overlay.innerHTML = "";
                 setView(
-                    new Game({
-                        level: 2
-                    })
+                    new Game()
                 );
                 overlay.removeEventListener("click", this.clickhandlerEvt);
                 renderFrame();

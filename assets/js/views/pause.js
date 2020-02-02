@@ -27,6 +27,7 @@ export default class PauseScreen extends Menu {
                 this.game.active = true;
                 renderFrame();
                 sounds.menusoundtrack.pause();
+                this.game.soundtrack.play();
                 break;
             case "main":
                 overlay.innerHTML = "";
